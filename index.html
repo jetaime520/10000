@@ -45,10 +45,8 @@
     .divider {
       height: 2px;
       background: #ccc;
-      margin: 0;
+      margin-top: 20px;
       width: 100px;
-      margin-left: auto;
-      margin-right: auto;
     }
     .spotify-container {
       display: flex;
@@ -61,8 +59,8 @@
       text-align: center;
     }
     .arrow {
-      margin-top: 20px;  /* 原本是 40px */
-      font-size: 1.6rem;  /* 原本是 2rem */
+      margin-top: 20px;
+      font-size: 1.6rem;
       cursor: pointer;
       animation: bounce 1.5s infinite;
     }
@@ -114,12 +112,20 @@
       font-size: 1.2rem;
       margin-top: 12px;
       display: none;
+      white-space: pre-wrap;
     }
-	@media (max-width: 390px) {
-	  .text {
-		font-size: 0.9rem;
-	  }
-	}
+    .fade-in {
+      animation: fadeIn 1.2s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 390px) {
+      .text {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -131,9 +137,10 @@
     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
   </iframe>
   <div style="margin-top: 16px; font-size: 1.2rem;">累了嗎？聽首歌好嗎？
-  <br>
-  <br>(請用Spotify播放，以達成最好體驗)</div>
+    <br><br>(請用Spotify播放，以達成最好體驗)
+  </div>
   <div class="arrow" onclick="scrollToSection('section1')">↓</div>
+  <div class="divider"></div>
 </div>
 
 <!-- Section 1 -->
@@ -144,9 +151,8 @@
     希望妳可以感受到十足的誠意。
   </div>
   <div class="arrow" onclick="scrollToSection('section2')">↓</div>
+  <div class="divider"></div>
 </div>
-
-<div class="divider"></div>
 
 <!-- Section 2 -->
 <div class="section" id="section2">
@@ -157,9 +163,8 @@
     直到妳出現在我的世界裡。
   </div>
   <div class="arrow" onclick="scrollToSection('section3')">↓</div>
+  <div class="divider"></div>
 </div>
-
-<div class="divider"></div>
 
 <!-- Section 3 -->
 <div class="section" id="section3">
@@ -182,13 +187,12 @@
     不讓妳失望。
   </div>
   <div class="arrow" onclick="scrollToSection('section4')">↓</div>
+  <div class="divider"></div>
 </div>
-
-<div class="divider"></div>
 
 <!-- Section 4 -->
 <div class="section" id="section4">
-  <div class="title">🧡 From Within  💚</div>
+  <div class="title">🧡 From Within 💚</div>
   <div class="text">
     這些對我來說陌生的心情，
     幾乎是從認識妳開始，每天都在發生。
@@ -205,22 +209,13 @@
     只希望妳是開心的。
   </div>
   <div class="arrow" onclick="scrollToSection('section5')">↓</div>
+  <div class="divider"></div>
 </div>
-
-<div class="divider"></div>
 
 <!-- Section 5 -->
 <div class="section" id="section5">
   <div class="title" id="finalTitle">💌↓ Click ↓</div>
-  <div class="text" id="extraMessage">
-    誠心地邀請妳，
-    陪我開始一段不會結束的旅程。<br>
-    從一個人的生活，
-    變成兩個人共享的日常。<br>
-    然後有一天， 
-    能把定情戒，
-    換成妳夢想中的婚戒。
-  </div>
+  <div class="text" id="extraMessage"></div>
   <div class="envelope" id="envelope" onclick="showMessage()"></div>
 </div>
 
@@ -230,58 +225,47 @@
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  //function showMessage() {
-  //  document.getElementById('extraMessage').style.display = 'block';
-  //  document.getElementById('finalTitle').style.display = 'none';
-
-  //  const envelope = document.getElementById('envelope');
-  //  envelope.innerHTML = '💍';
-  //  envelope.style.fontSize = '2.5rem';
-  //  envelope.style.border = 'none';
-  //  envelope.style.background = 'none';
-  //  envelope.classList.add('opened'); // 加這行來隱藏 ::before
-  //}
-  
   function showMessage() {
-  const message =
-    `誠心地邀請妳，\n` +
-    `陪我開始一段不會結束的旅程。\n` +
-    `讓原本是一個人的生活，\n` +
-    `變成兩個人共享的日常。\n` +
-    `然後有一天，\n` +
-    `能把定情戒，\n` +
-    `換成妳夢想中的婚戒。`;
+    const message =
+      `誠心地邀請妳，\n` +
+      `陪我開始一段不會結束的旅程。\n` +
+      `讓原本是一個人的生活，\n` +
+      `變成兩個人共享的日常。\n` +
+      `然後有一天，\n` +
+      `能把定情戒，\n` +
+      `換成妳夢想中的婚戒。`;
 
-  const extra = document.getElementById('extraMessage');
-  const title = document.getElementById('finalTitle');
-  const envelope = document.getElementById('envelope');
+    const extra = document.getElementById('extraMessage');
+    const title = document.getElementById('finalTitle');
+    const envelope = document.getElementById('envelope');
 
-  title.style.display = 'none';
-  extra.style.display = 'block';
-  extra.textContent = '';
+    title.style.display = 'none';
+    extra.style.display = 'block';
+    extra.textContent = '';
 
-  let i = 0;
-  const speed = 60; // 速度（毫秒/字），你可以試著調成 20 或 50 看效果
+    let i = 0;
+    const speed = 60;
 
-  function typeWriter() {
-    if (i < message.length) {
-      const char = message.charAt(i);
-      extra.textContent += char === '\n' ? '\n' : char;
-      i++;
-      setTimeout(typeWriter, speed);
-    } else {
-      // 顯示戒指
-      envelope.innerHTML = '💍';
-      envelope.style.fontSize = '2.5rem';
-      envelope.style.border = 'none';
-      envelope.style.background = 'none';
-      envelope.classList.add('opened');
+    function typeWriter() {
+      if (i < message.length) {
+        const char = message.charAt(i);
+        extra.textContent += char === '\n' ? '\n' : char;
+        i++;
+        setTimeout(typeWriter, speed);
+      } else {
+        setTimeout(() => {
+          envelope.innerHTML = '💍';
+          envelope.style.fontSize = '2.5rem';
+          envelope.style.border = 'none';
+          envelope.style.background = 'none';
+          envelope.classList.add('opened', 'fade-in');
+        }, 500);
+      }
     }
+
+    typeWriter();
   }
 
-  typeWriter();
-}	
-  // Intersection Observer for fade-in sections
   const sectionObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -294,7 +278,6 @@
     sectionObserver.observe(section);
   });
 
-  // Observer for triggering blink animation
   const blinkObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
