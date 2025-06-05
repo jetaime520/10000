@@ -61,8 +61,8 @@
       text-align: center;
     }
     .arrow {
-      margin-top: 40px;
-      font-size: 2rem;
+      margin-top: 20px;  /* 原本是 40px */
+      font-size: 1.6rem;  /* 原本是 2rem */
       cursor: pointer;
       animation: bounce 1.5s infinite;
     }
@@ -230,18 +230,57 @@
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function showMessage() {
-    document.getElementById('extraMessage').style.display = 'block';
-    document.getElementById('finalTitle').style.display = 'none';
+  //function showMessage() {
+  //  document.getElementById('extraMessage').style.display = 'block';
+  //  document.getElementById('finalTitle').style.display = 'none';
 
-    const envelope = document.getElementById('envelope');
-    envelope.innerHTML = '💍';
-    envelope.style.fontSize = '2.5rem';
-    envelope.style.border = 'none';
-    envelope.style.background = 'none';
-    envelope.classList.add('opened'); // 加這行來隱藏 ::before
+  //  const envelope = document.getElementById('envelope');
+  //  envelope.innerHTML = '💍';
+  //  envelope.style.fontSize = '2.5rem';
+  //  envelope.style.border = 'none';
+  //  envelope.style.background = 'none';
+  //  envelope.classList.add('opened'); // 加這行來隱藏 ::before
+  //}
+  
+  function showMessage() {
+  const message =
+    `誠心地邀請妳，\n` +
+    `陪我開始一段不會結束的旅程。\n` +
+    `讓原本是一個人的生活，\n` +
+    `變成兩個人共享的日常。\n` +
+    `然後有一天，\n` +
+    `能把定情戒，\n` +
+    `換成妳夢想中的婚戒。`;
+
+  const extra = document.getElementById('extraMessage');
+  const title = document.getElementById('finalTitle');
+  const envelope = document.getElementById('envelope');
+
+  title.style.display = 'none';
+  extra.style.display = 'block';
+  extra.textContent = '';
+
+  let i = 0;
+  const speed = 30; // 速度（毫秒/字），你可以試著調成 20 或 50 看效果
+
+  function typeWriter() {
+    if (i < message.length) {
+      const char = message.charAt(i);
+      extra.textContent += char === '\n' ? '\n' : char;
+      i++;
+      setTimeout(typeWriter, speed);
+    } else {
+      // 顯示戒指
+      envelope.innerHTML = '💍';
+      envelope.style.fontSize = '2.5rem';
+      envelope.style.border = 'none';
+      envelope.style.background = 'none';
+      envelope.classList.add('opened');
+    }
   }
 
+  typeWriter();
+}	
   // Intersection Observer for fade-in sections
   const sectionObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
