@@ -83,9 +83,6 @@
       justify-content: center;
       align-items: center;
     }
-    .envelope::before {
-      display: none;
-    }
     .highlight-pink {
       color: #e91e63;
       font-weight: bold;
@@ -143,24 +140,94 @@
 </head>
 <body>
 
-<!-- 節省篇幅，Section 可照原本結構調整，加上下方這段 -->
+<!-- Sections 1~5 with walking people -->
 <div class="section" id="section1">
   <div class="title">☁️ 親愛的白花椰菜 ☁️</div>
-  <div class="text">這是身為一名工程師所能給妳的最大浪漫。希望妳可以感受到十足的誠意。</div>
+  <div class="text">
+    這是身為一名工程師所能給妳的最大浪漫。
+    希望妳可以感受到十足的誠意。
+  </div>
   <div class="arrow" onclick="scrollToSection('section2')">↓</div>
   <div class="divider"></div>
   <div class="people-wrapper" id="people1">
-    <div>🚶‍♀️</div><div>🚶‍♂️</div>
+    <div>🚶‍♀️</div>
+    <div>🚶‍♂️</div>
   </div>
 </div>
-<!-- 其他 section 也加入類似結尾 people-wrapper -->
 
-<!-- 最後一段用 💑 替代 -->
+<div class="section" id="section2">
+  <div class="title">🎵 About The Song 🎵</div>
+  <div class="text">
+    從小我就非常喜歡這首歌，很芭樂、很老派，
+    但我從來沒在聽這首歌的時候想到任何人，
+    直到妳出現在我的世界裡。
+  </div>
+  <div class="arrow" onclick="scrollToSection('section3')">↓</div>
+  <div class="divider"></div>
+  <div class="people-wrapper" id="people2">
+    <div>🚶‍♀️</div>
+    <div>🚶‍♂️</div>
+  </div>
+</div>
+
+<div class="section" id="section3">
+  <div class="title">🚶‍♀️ Since I Met You 🚶‍♂️</div>
+  <div class="text">
+    每次和妳見面之前，我都會認真思考要穿什麼，
+    希望自己是妳喜歡的樣子。
+
+    出門前也會記得挑選當天的味道，
+    因為我期待見面時和妳交換香味的片刻。
+
+    我想了解妳的一切，
+    因為希望在妳需要的時候接住妳，
+    讓妳再也不會感到孤單。
+
+    妳說過的、我答應的，無論多小，
+    我都會記得去做。
+    因為我希望妳能相信，
+    我會守住每一個承諾，
+    不讓妳失望。
+  </div>
+  <div class="arrow" onclick="scrollToSection('section4')">↓</div>
+  <div class="divider"></div>
+  <div class="people-wrapper" id="people3">
+    <div>🚶‍♀️</div>
+    <div>🚶‍♂️</div>
+  </div>
+</div>
+
+<div class="section" id="section4">
+  <div class="title">🧡 From Within 💚</div>
+  <div class="text">
+    這些對我來說陌生的心情，
+    幾乎是從認識妳開始，每天都在發生。
+    也正是這些看不見卻很重要的小事，
+    讓我確定，
+    我真的
+    <div style="display: flex; justify-content: center; gap: 4px; margin-top: 12px;">
+      <span class="highlight-pink" id="highlight1">很</span>
+      <span class="highlight-pink" id="highlight2">喜</span>
+      <span class="highlight-pink" id="highlight3">歡</span>
+      <span class="highlight-pink" id="highlight4">妳</span>
+    </div>
+    喜歡到會自然地把妳放在自己前面，
+    只希望妳是開心的。
+  </div>
+  <div class="arrow" onclick="scrollToSection('section5')">↓</div>
+  <div class="divider"></div>
+  <div class="people-wrapper" id="people4">
+    <div>🚶‍♀️</div>
+    <div>🚶‍♂️</div>
+  </div>
+</div>
+
 <div class="section" id="section5">
   <div class="title" id="finalTitle">💌↓ Click ↓</div>
   <div class="text" id="extraMessage"></div>
   <div class="envelope" id="envelope" onclick="showMessage()"></div>
-  <div class="people-wrapper visible" style="justify-content: center; gap: 8px;">
+  <div class="divider"></div>
+  <div class="people-wrapper visible">
     <div>💑</div>
   </div>
 </div>
@@ -172,8 +239,7 @@ function scrollToSection(id) {
 }
 
 function showMessage() {
-  const message =
-    `誠心地邀請妳，\n` +
+  const message = `誠心地邀請妳，\n` +
     `陪我開始一段不會結束的旅程。\n` +
     `讓原本是一個人的生活，\n` +
     `變成兩個人共享的日常。\n` +
@@ -231,18 +297,6 @@ document.querySelectorAll('.section').forEach(section => {
   sectionObserver.observe(section);
 });
 
-const blinkObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      document.querySelectorAll('.highlight-pink').forEach(el => {
-        el.classList.add('animate');
-      });
-    }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.highlight-pink').forEach(el => blinkObserver.observe(el));
-
 const peopleObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -254,6 +308,18 @@ const peopleObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('.people-wrapper').forEach(el => {
   peopleObserver.observe(el);
 });
+
+const blinkObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.highlight-pink').forEach(el => {
+        el.classList.add('animate');
+      });
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.highlight-pink').forEach(el => blinkObserver.observe(el));
 </script>
 
 </body>
