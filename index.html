@@ -95,6 +95,7 @@
       background: linear-gradient(to bottom right, transparent 50%, #ccc 50%);
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
+      display: none;
     }
     .highlight-pink {
       color: #e91e63;
@@ -238,6 +239,7 @@
     envelope.style.fontSize = '2.5rem';
     envelope.style.border = 'none';
     envelope.style.background = 'none';
+    envelope.classList.add('opened'); // 加這行來隱藏 ::before
   }
 
   // Intersection Observer for fade-in sections
