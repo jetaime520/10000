@@ -126,6 +126,19 @@
         font-size: 0.9rem;
       }
     }
+    .envelope.open-animation {
+  animation: openEnvelope 0.6s ease forwards;
+  transform-origin: top center;
+}
+
+@keyframes openEnvelope {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
   </style>
 </head>
 <body>
@@ -225,21 +238,25 @@
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function showMessage() {
-    const message =
-      `誠心地邀請妳，\n` +
-      `陪我開始一段不會結束的旅程。\n` +
-      `從一個人的生活，\n` +
-      `變成兩個人共享的日常。\n` +
-      `然後有一天，\n` +
-      `能把定情戒，\n` +
-      `換成妳夢想中的婚戒。`;
+ function showMessage() {
+  const message =
+    `誠心地邀請妳，\n` +
+    `陪我開始一段不會結束的旅程。\n` +
+    `讓原本是一個人的生活，\n` +
+    `變成兩個人共享的日常。\n` +
+    `然後有一天，\n` +
+    `能把定情戒，\n` +
+    `換成妳夢想中的婚戒。`;
 
-    const extra = document.getElementById('extraMessage');
-    const title = document.getElementById('finalTitle');
-    const envelope = document.getElementById('envelope');
+  const extra = document.getElementById('extraMessage');
+  const title = document.getElementById('finalTitle');
+  const envelope = document.getElementById('envelope');
 
-    title.style.display = 'none';
+  title.style.display = 'none';
+  envelope.classList.add('open-animation');
+
+  setTimeout(() => {
+    envelope.style.display = 'none';  // 信封消失
     extra.style.display = 'block';
     extra.textContent = '';
 
@@ -254,17 +271,20 @@
         setTimeout(typeWriter, speed);
       } else {
         setTimeout(() => {
+          envelope.style.display = 'flex';
           envelope.innerHTML = '💍';
           envelope.style.fontSize = '2.5rem';
           envelope.style.border = 'none';
           envelope.style.background = 'none';
-          envelope.classList.add('opened', 'fade-in');
+          envelope.classList.remove('open-animation');
+          envelope.classList.add('fade-in');
         }, 500);
       }
     }
 
     typeWriter();
-  }
+  }, 600); // 等信封動畫播完
+}
 
   const sectionObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
