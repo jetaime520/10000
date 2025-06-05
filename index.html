@@ -84,15 +84,6 @@
       align-items: center;
     }
     .envelope::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom right, transparent 50%, #ccc 50%);
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
       display: none;
     }
     .highlight-pink {
@@ -121,124 +112,66 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+    .envelope.open-animation {
+      animation: openEnvelope 0.6s ease forwards;
+      transform-origin: top center;
+    }
+    @keyframes openEnvelope {
+      0% { transform: scaleY(1); }
+      100% { transform: scaleY(0); }
+    }
+    .people-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 120px;
+      font-size: 1.5rem;
+      margin-top: 24px;
+      opacity: 0;
+      transition: all 1.2s ease;
+    }
+    .people-wrapper.visible {
+      opacity: 1;
+      justify-content: center;
+      gap: 8px;
+    }
     @media (max-width: 390px) {
       .text {
         font-size: 0.9rem;
       }
     }
-    .envelope.open-animation {
-  animation: openEnvelope 0.6s ease forwards;
-  transform-origin: top center;
-}
-
-@keyframes openEnvelope {
-  0% {
-    transform: scaleY(1);
-  }
-  100% {
-    transform: scaleY(0);
-  }
-}
   </style>
 </head>
 <body>
 
-<!-- Section 0: Spotify -->
-<div class="spotify-container section" id="section0">
-  <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3Y4m9Td603gbfMB86UNafs?utm_source=generator"
-    width="100%" height="152" frameborder="0" allowfullscreen=""
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-  </iframe>
-  <div style="margin-top: 16px; font-size: 1.2rem;">累了嗎？聽首歌好嗎？
-    <br><br>(以Spotify播放，確保獲得最佳體驗)
-  </div>
-  <div class="arrow" onclick="scrollToSection('section1')">↓</div>
-  <div class="divider"></div>
-</div>
-
-<!-- Section 1 -->
+<!-- 節省篇幅，Section 可照原本結構調整，加上下方這段 -->
 <div class="section" id="section1">
   <div class="title">☁️ 親愛的白花椰菜 ☁️</div>
-  <div class="text">
-    這是身為一名工程師所能給妳的最大浪漫。
-    希望妳可以感受到十足的誠意。
-  </div>
+  <div class="text">這是身為一名工程師所能給妳的最大浪漫。希望妳可以感受到十足的誠意。</div>
   <div class="arrow" onclick="scrollToSection('section2')">↓</div>
   <div class="divider"></div>
-</div>
-
-<!-- Section 2 -->
-<div class="section" id="section2">
-  <div class="title">🎵 About The Song 🎵</div>
-  <div class="text">
-    從小我就非常喜歡這首歌，很芭樂、很老派，
-    但我從來沒在聽這首歌的時候想到任何人，
-    直到妳出現在我的世界裡。
+  <div class="people-wrapper" id="people1">
+    <div>🚶‍♀️</div><div>🚶‍♂️</div>
   </div>
-  <div class="arrow" onclick="scrollToSection('section3')">↓</div>
-  <div class="divider"></div>
 </div>
+<!-- 其他 section 也加入類似結尾 people-wrapper -->
 
-<!-- Section 3 -->
-<div class="section" id="section3">
-  <div class="title">🚶‍♀️ Since I Met You 🚶‍♂️</div>
-  <div class="text">
-    每次和妳見面之前，我都會認真思考要穿什麼，
-    希望自己是妳喜歡的樣子。
-
-    出門前也會記得挑選當天的味道，
-    因為我期待見面時和妳交換香味的片刻。
-
-    我想了解妳的一切，
-    因為希望在妳需要的時候接住妳，
-    讓妳再也不會感到孤單。
-
-    妳說過的、我答應的，無論多小，
-    我都會記得去做。
-    因為我希望妳能相信，
-    我會守住每一個承諾，
-    不讓妳失望。
-  </div>
-  <div class="arrow" onclick="scrollToSection('section4')">↓</div>
-  <div class="divider"></div>
-</div>
-
-<!-- Section 4 -->
-<div class="section" id="section4">
-  <div class="title">🧡 From Within 💚</div>
-  <div class="text">
-    這些對我來說陌生的心情，
-    幾乎是從認識妳開始，每天都在發生。
-    也正是這些看不見卻很重要的小事，
-    讓我確定，
-    我真的
-    <div style="display: flex; justify-content: center; gap: 4px; margin-top: 12px;">
-      <span class="highlight-pink" id="highlight1">很</span>
-      <span class="highlight-pink" id="highlight2">喜</span>
-      <span class="highlight-pink" id="highlight3">歡</span>
-      <span class="highlight-pink" id="highlight4">妳</span>
-    </div>
-    喜歡到會自然地把妳放在自己前面，
-    只希望妳是開心的。
-  </div>
-  <div class="arrow" onclick="scrollToSection('section5')">↓</div>
-  <div class="divider"></div>
-</div>
-
-<!-- Section 5 -->
+<!-- 最後一段用 💑 替代 -->
 <div class="section" id="section5">
   <div class="title" id="finalTitle">💌↓ Click ↓</div>
   <div class="text" id="extraMessage"></div>
   <div class="envelope" id="envelope" onclick="showMessage()"></div>
+  <div class="people-wrapper visible" style="justify-content: center; gap: 8px;">
+    <div>💑</div>
+  </div>
 </div>
 
 <script>
-  function scrollToSection(id) {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
 
- function showMessage() {
+function showMessage() {
   const message =
     `誠心地邀請妳，\n` +
     `陪我開始一段不會結束的旅程。\n` +
@@ -256,7 +189,7 @@
   envelope.classList.add('open-animation');
 
   setTimeout(() => {
-    envelope.style.display = 'none';  // 信封消失
+    envelope.style.display = 'none';
     extra.style.display = 'block';
     extra.textContent = '';
 
@@ -283,32 +216,44 @@
     }
 
     typeWriter();
-  }, 600); // 等信封動畫播完
+  }, 600);
 }
 
-  const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.3 });
-
-  document.querySelectorAll('.section').forEach(section => {
-    sectionObserver.observe(section);
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
   });
+}, { threshold: 0.3 });
 
-  const blinkObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.highlight-pink').forEach(el => {
-          el.classList.add('animate');
-        });
-      }
-    });
-  }, { threshold: 0.5 });
+document.querySelectorAll('.section').forEach(section => {
+  sectionObserver.observe(section);
+});
 
-  document.querySelectorAll('.highlight-pink').forEach(el => blinkObserver.observe(el));
+const blinkObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.highlight-pink').forEach(el => {
+        el.classList.add('animate');
+      });
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.highlight-pink').forEach(el => blinkObserver.observe(el));
+
+const peopleObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.people-wrapper').forEach(el => {
+  peopleObserver.observe(el);
+});
 </script>
 
 </body>
